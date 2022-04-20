@@ -1,5 +1,7 @@
 const { User } = require('../../db/models');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const { token } = require('morgan');
 
 module.exports = {
   signin: async (req, res, next) => {
@@ -19,8 +21,17 @@ module.exports = {
 
         // Check password is valid
         if (checkPassword) {
+          const token = jwt.sign({
+            user: {
+              id: checkUser.id,
+              name: checkUser.name,
+              email: checkUser.email
+            }
+          }, 'secret');
+
           res.status(200).json({
-            message: 'Login success'
+            message: 'Login success',
+            token: token
           });
         } else {
           res.status(403).json({
