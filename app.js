@@ -15,12 +15,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', (req, res, next) => {
-  res.json({
+app.get('/', (req, res, next) => {
+  res.status(200).json({
     message: 'Toko Buku API'
   });
 });
+
+// Create API endpoint
 app.use(`${url}`, authRouter);
 app.use(`${url}`, categoriesRouter);
+
 
 module.exports = app;

@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
+const controller = require('./controller');
 
-/* GET home page. */
-router.get('/auth', function(req, res, next) {
+router.post('/auth/signin', controller.signin);
+
+router.get('/auth/signin', (req, res, next) => {
   res.status(200).json({
-    message: 'Router auth'
+    message: 'Signin GET'
   });
 });
 
