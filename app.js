@@ -5,6 +5,7 @@ const logger = require('morgan');
 
 const authRouter = require('./app/api/auth/router');
 const categoriesRouter = require('./app/api/categories/router');
+const booksRouter = require('./app/api/books/router');
 const url = '/api/v1';
 
 const app = express();
@@ -24,6 +25,7 @@ app.get('/', (req, res, next) => {
 // Create API endpoint
 app.use(`${url}`, authRouter);
 app.use(`${url}`, categoriesRouter);
+app.use(`${url}`, booksRouter);
 
 
 module.exports = app;
