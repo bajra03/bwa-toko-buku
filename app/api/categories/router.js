@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const { auth } = require('../../middlewares/auth');
-const { getAllCategories, createCategories, updateCategories, deleteCategories } = require('./controller');
+const { getAllCategories, createCategories, updateCategories, deleteCategories, getCategoriesById } = require('./controller');
 
 /* GET home page. */
 router.get('/categories', auth, getAllCategories);
+router.get('/categories/:id', auth, getCategoriesById);
 // Create Category
 router.post('/categories', auth, createCategories);
 // update category by id

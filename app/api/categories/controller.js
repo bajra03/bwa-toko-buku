@@ -22,6 +22,30 @@ module.exports = {
     }
   },
 
+  getCategoriesById: async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      
+      const categories = await Category.findOne(
+        {
+          where: {
+            id: id,
+            user: req.user.id
+          },
+          attributes: ['id', 'name'],
+        }        
+      );
+
+      res.status(200).json({
+        message: "Get category by id success",
+        data: categories
+      })
+
+    } catch (err) {
+      next(err);
+    }
+  },
+
   createCategories: async (req, res, next) => {
     try {
       // console.log("User ID: ", req.user.id);
