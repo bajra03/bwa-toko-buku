@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 module.exports = {
-  signin: async (req, res, next) => {
+  signIn: async (req, res, next) => {
     try {
       const { email, password } = req.body;
       const checkUser = await User.findOne(
@@ -50,7 +50,7 @@ module.exports = {
     }
   },
 
-  signup: async (req, res, next) => {
+  signUp: async (req, res, next) => {
     try {
       // make request from body
       const { name, email, password, confirmPassword } = req.body;

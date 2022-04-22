@@ -1,9 +1,9 @@
 const express = require('express');
+const { signIn, signUp } = require('./controller');
 const router = express.Router();
-const controller = require('./controller');
 
-router.post('/auth/signin', controller.signin);
-router.post('/auth/signup', controller.signup);
+router.post('/auth/signin', signIn);
+router.post('/auth/signup', signUp);
 
 router.get('/auth/signin', (req, res, next) => {
   res.status(200).json({
