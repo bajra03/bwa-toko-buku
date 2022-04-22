@@ -47,16 +47,20 @@ module.exports = {
     try {
       const { id } = req.params;
       const { name } = req.body;
-      const categories = await Category.update(
-        {
-          name
-        },
+
+      const checkCategory = await Category.findOne(
         {
           where: {
             id: id,
             user: req.user.id
           }
         }
+      )
+
+      const categories = await checkCategory.update(
+        {
+          name: name
+        },
       );
 
       res.status(200).json({
