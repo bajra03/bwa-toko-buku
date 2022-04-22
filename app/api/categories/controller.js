@@ -15,27 +15,55 @@ module.exports = {
       res.status(200).json({
         message: "Success get all categories",
         data: categories
-      })
+      });
+
     } catch (err) {
       next(err);
     }
   },
 
-  createCategory: async (req, res, next) => {
+  createCategories: async (req, res, next) => {
     try {
-      console.log("User ID: ", req.user.id);
+      // console.log("User ID: ", req.user.id);
       const { name } = req.body;
       const categories = await Category.create(
         {
           user: req.user.id,
           name: name,
         }
-      )
+      );
 
       res.status(201).json({
         message: "Category created!",
         data: categories
-      })
+      });
+
+    } catch (err) {
+      next(err);
+    }
+  },
+
+  updateCategories: async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const { name } = req.body;
+      const categories = await Category.update(
+        {
+          name
+        },
+        {
+          where: {
+            id: id,
+            user: req.user.id
+          }
+        }
+      );
+
+      res.status(200).json({
+        message: "Category updated!",
+        data: categories
+      });
+
     } catch (err) {
       next(err);
     }
