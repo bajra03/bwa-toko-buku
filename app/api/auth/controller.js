@@ -75,6 +75,7 @@ module.exports = {
         })
       }
 
+      // craete user object to store to the User models
       const user = await User.create({
         name,
         email,
