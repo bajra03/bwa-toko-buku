@@ -44,6 +44,8 @@ module.exports = {
           stock: checkBook.stock - payload.quantity
         });
 
+        // console.log(updateStock);
+
         if (payload[i].quantity > checkBook.stock) {
           errorBookIdStock.push(
             `${payload[i].quantity} - ${checkBook.stok}`
@@ -54,16 +56,16 @@ module.exports = {
           errorBookIdNotFound.push(payload[i].bookId);
         }
 
-        if (errorBookIdStock) {
+        if (errorBookIdStock !== 0) {
           return res.status(400).json({
             message: `Stock of the book is not enough, with id : ${errorBookIdStock.join(', ')} and user : ${user}`
           });
         }
 
-        if (errorBookIdNotFound) {
+        if (errorBookIdNotFound !== 0) {
           return res.status(400).json({
             message: `there is no book with id : ${errorBookIdNotFound.join(', ')} and user : ${user}`
-          })
+          });
         }
 
         await Book.bulkCraete(
@@ -76,16 +78,19 @@ module.exports = {
           }
         );
 
-        const detailTransaction = await DetailTransaction.bulkCraete(payload, {
-          transaction: t
-        });
+        const detailTransaction = await DetailTransaction.bulkCraete(
+          payload,
+          {
+            transaction: t
+          }
+        );
 
         await t.commit();
 
         res.status(201).json({
           message: `Success checkout`,
           data: detailTransaction
-        })
+        });
       }
     } catch (err) {
       await t.rollback();
