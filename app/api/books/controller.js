@@ -4,11 +4,14 @@ const { Book, Category } = require('../../db/models');
 module.exports = {
   getAllBooks: async(req, res, next) => {
     try {
-      const { keyword = "", category = "" } = req.query;
+      const {
+        keyword = "",
+        category = ""
+      } = req.query;
+
       let condition = {
         user: req.user.id,
       }
-      console.log(keyword);
 
       if (keyword !== "") {
         condition = {
@@ -33,10 +36,11 @@ module.exports = {
           attributes: ['id', 'name']
         },
       });
+
       res.status(200).json({
         message: "Get all books!",
         data: books
-      })
+      });
 
     } catch (err) {
       next(err);
