@@ -7,6 +7,7 @@ const authRouter = require('./app/api/auth/router');
 const categoriesRouter = require('./app/api/categories/router');
 const booksRouter = require('./app/api/books/router');
 const uploadsRouter = require('./app/api/uploads/router');
+const checkoutRouter = require('./app/api/checkout/router');
 
 const url = '/api/v1';
 
@@ -29,6 +30,7 @@ app.use(`${url}`, authRouter);
 app.use(`${url}`, categoriesRouter);
 app.use(`${url}`, booksRouter);
 app.use(`${url}`, uploadsRouter);
+app.use(`${url}`, checkoutRouter);
 
 
 module.exports = app;
