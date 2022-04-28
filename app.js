@@ -7,7 +7,7 @@ const authRouter = require('./app/api/auth/router');
 const categoriesRouter = require('./app/api/categories/router');
 const booksRouter = require('./app/api/books/router');
 const uploadsRouter = require('./app/api/uploads/router');
-const checkoutRouter = require('./app/api/checkout/router');
+const checkoutRouter = require('./app/api/checkouts/router');
 
 const url = '/api/v1';
 
