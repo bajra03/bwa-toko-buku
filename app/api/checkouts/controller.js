@@ -32,8 +32,6 @@ module.exports = {
             user: user
           }
         });
-
-        console.log('checking: ', checkBook)
         
         payload[i].transaction = transaction.id;
         payload[i].user = user;
@@ -51,10 +49,8 @@ module.exports = {
           }
         );
 
-        // console.log('check book stock: ',  payload[i].bookId);
-
         if (payload[i].quantity > checkBook.stock) {
-          errorBookIdStock.push(`${payload[i].quantity} - ${checkBook.stok}`);
+          errorBookIdStock.push(`${payload[i].quantity} - ${checkBook.stock}`);
         }
         
         if (!checkBook) {
@@ -62,9 +58,6 @@ module.exports = {
         }
       }
       
-      // console.log(payload)
-      // console.log(updateStock)
-
       if (errorBookIdStock.length !== 0) {
         return res.status(400).json({
           message: `Stock of the book is not enough, with id : ${errorBookIdStock.join(', ')} and user : ${user}`
