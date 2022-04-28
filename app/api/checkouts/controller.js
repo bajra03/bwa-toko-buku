@@ -33,7 +33,7 @@ module.exports = {
           }
         });
 
-        // console.log('checking: ', checkBook.title)
+        console.log('checking: ', checkBook)
         
         payload[i].transaction = transaction.id;
         payload[i].user = user;
@@ -56,12 +56,12 @@ module.exports = {
         if (payload[i].quantity > checkBook.stock) {
           errorBookIdStock.push(`${payload[i].quantity} - ${checkBook.stok}`);
         }
-
+        
         if (!checkBook) {
           errorBookIdNotFound.push(payload[i].bookId);
         }
       }
-
+      
       // console.log(payload)
       // console.log(updateStock)
 
@@ -80,7 +80,7 @@ module.exports = {
       await Book.bulkCreate(
         updateStock,
         {
-          updateOnDuplicate: ['stock', 'id']
+          updateOnDuplicate: ['stock']
         },
         {
           transaction: t
@@ -101,7 +101,7 @@ module.exports = {
         data: detailTransaction
       });
     } catch (err) {
-      if(t) await t.rollback();
+      await t.rollback();
       next(err);
     }
   }
