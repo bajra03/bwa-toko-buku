@@ -3,7 +3,7 @@ const { Category } = require('../../db/models');
 module.exports = {
   getAllCategories: async (req, res, next) => {
     try {
-      console.log("User ID: ", req.user.id);
+      // console.log("User ID: ", req.user.id);
       // get all category based on created by the user login
       const categories = await Category.findAll({
         where: {

@@ -5,15 +5,15 @@ module.exports = {
   getAllBooks: async(req, res, next) => {
     try {
       const {
-        keyword = "",
-        category = ""
+        keyword = '',
+        category = ''
       } = req.query;
 
       let condition = {
         user: req.user.id,
       }
 
-      if (keyword !== "") {
+      if (keyword !== '') {
         condition = {
           ...condition,
           title: {
@@ -22,7 +22,7 @@ module.exports = {
         }
       }
 
-      if (category !== "") {
+      if (category !== '') {
         condition = {
           ...condition,
           category: category
@@ -38,7 +38,7 @@ module.exports = {
       });
 
       res.status(200).json({
-        message: "Get all books!",
+        message: 'Get all books!',
         data: books
       });
 
@@ -69,7 +69,7 @@ module.exports = {
 
       if (!checkCategory) {
         return res.status(404).json({
-          message: "Category not found"
+          message: 'Category not found'
         });
       }
 
@@ -85,7 +85,7 @@ module.exports = {
       });
 
       res.status(201).json({
-        message: "Book has been created!",
+        message: 'Book has been created!',
         data: books
       });
     } catch (err) {
@@ -116,7 +116,7 @@ module.exports = {
 
       if (!checkCategory) {
         return res.status(404).json({
-          message: "Category not found"
+          message: 'Category not found'
         });
       }
 
@@ -128,7 +128,7 @@ module.exports = {
 
       if (!checkBook) {
         res.status(404).json({
-          message: "Book now found"
+          message: 'Book now found'
         });
       }
 
@@ -145,7 +145,7 @@ module.exports = {
       });
 
       res.status(200).json({
-        message: "Book has been updated!",
+        message: 'Book has been updated!',
         data: books
       });
     } catch (err) {
@@ -167,14 +167,14 @@ module.exports = {
 
       if (!checkBook) {
         return res.status(404).json({
-          message: "ID Book not found!"
+          message: 'ID Book not found!'
         });
       }
 
       const book = await checkBook.destroy();
 
       res.status(200).json({
-        message: "Book has been deleted",
+        message: 'Book has been deleted',
         data: book
       })
     } catch (err) {

@@ -45,7 +45,6 @@ module.exports = {
         })
       }
     } catch (err) {
-      console.log(err);
       next(err);
     }
   },
@@ -83,7 +82,6 @@ module.exports = {
         role: 'admin'
       });
 
-      // console.log(user);
       // delete password from response
       delete user.dataValues.password;
 
