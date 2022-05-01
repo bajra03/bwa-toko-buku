@@ -1,10 +1,9 @@
 const { User } = require('../../db/models');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { token } = require('morgan');
 
 module.exports = {
-  signin: async (req, res, next) => {
+  signIn: async (req, res, next) => {
     try {
       const { email, password } = req.body;
       const checkUser = await User.findOne(
@@ -21,6 +20,7 @@ module.exports = {
 
         // Check password is valid
         if (checkPassword) {
+          // create token
           const token = jwt.sign({
             user: {
               id: checkUser.id,
@@ -45,8 +45,52 @@ module.exports = {
         })
       }
     } catch (err) {
-      console.log(err);
       next(err);
     }
   },
+
+  signUp: async (req, res, next) => {
+    try {
+      // make request from body
+      const { name, email, password, confirmPassword } = req.body;
+
+      const checkEmail = await User.findOne({
+        where: {
+          email: email,
+        }
+      });
+
+      // check email is exist in database
+      if (checkEmail) {
+        return res.status(403).json({
+          message: "Email has been registered!"
+        })
+      }
+
+      // Check password are match or not
+      if (password !== confirmPassword) {
+        res.status(403).json({
+          message: "Password are not match!"
+        })
+      }
+
+      // craete user object to store to the User models
+      const user = await User.create({
+        name,
+        email,
+        password: bcrypt.hashSync(password, 10),
+        role: 'admin'
+      });
+
+      // delete password from response
+      delete user.dataValues.password;
+
+      res.status(201).json({
+        message: 'Register success',
+        data: user
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
 };

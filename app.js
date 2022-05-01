@@ -5,6 +5,11 @@ const logger = require('morgan');
 
 const authRouter = require('./app/api/auth/router');
 const categoriesRouter = require('./app/api/categories/router');
+const booksRouter = require('./app/api/books/router');
+const uploadsRouter = require('./app/api/uploads/router');
+const checkoutRouter = require('./app/api/checkouts/router');
+const transactionsRouter = require('./app/api/transactions/router');
+
 const url = '/api/v1';
 
 const app = express();
@@ -24,6 +29,10 @@ app.get('/', (req, res, next) => {
 // Create API endpoint
 app.use(`${url}`, authRouter);
 app.use(`${url}`, categoriesRouter);
+app.use(`${url}`, booksRouter);
+app.use(`${url}`, uploadsRouter);
+app.use(`${url}`, checkoutRouter);
+app.use(`${url}`, transactionsRouter);
 
 
 module.exports = app;

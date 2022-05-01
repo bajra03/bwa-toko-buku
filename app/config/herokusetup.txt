@@ -1,0 +1,7 @@
+Host => ec2-52-3-200-138.compute-1.amazonaws.com
+Database => db6kssnjanj4tr
+User => xwpkyryqgytlan
+Port => 5432
+Password => 7ef167f239646d2549744ca9c014cdd3df8138aca9a4a83a25e7ae70de9438ed
+URI -> postgres://xwpkyryqgytlan:7ef167f239646d2549744ca9c014cdd3df8138aca9a4a83a25e7ae70de9438ed@ec2-52-3-200-138.compute-1.amazonaws.com:5432/db6kssnjanj4tr
+Heroku CLI => heroku pg:psql postgresql-animate-51802 --app bwa-toko-buku-bajra
